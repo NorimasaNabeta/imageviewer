@@ -1,3 +1,7 @@
+# -*- mode: python; coding: utf-8-unix -*-
+#
+# Time-stamp: <2020-12-09 20:15:15 norim>
+#
 
 class Pager(object):
     def __init__(self, count):

@@ -1,9 +1,23 @@
+# -*- mode: python; coding: utf-8-unix -*-
+#
+# Time-stamp: <2020-12-09 20:26:49 norim>
+#
+
+# @note usage
+#
+# set FLASK_APP=app
+# set FLASK_ENV=development
+# flask run
+#
 import csv
 from flask import Flask, render_template, request, redirect, url_for
 import requests
 from pager import Pager
 
 
+# @breif csv loader into the table hash.
+#
+#
 def read_table(url):
     """Return a list of dict"""
     # r = requests.get(url)
@@ -25,11 +39,25 @@ app.config.update(
     )
 
 
+# [template connstraction]
+# layout.html
+#  +-- 404.html
+#  +-- imageview.html
+#        +-- links.html
+#        +-- table.html
+#
+
+
+# @breif home redirector
+#
+#
 @app.route('/')
 def index():
     return redirect('/0')
 
-
+# @breif page handler
+#
+#
 @app.route('/<int:ind>/')
 def image_view(ind=None):
     if ind >= pager.count:
@@ -43,6 +71,9 @@ def image_view(ind=None):
             data=table[ind])
 
 
+# @breif processs goto form requests 
+#
+#
 @app.route('/goto', methods=['POST', 'GET'])    
 def goto():
     return redirect('/' + request.form['index'])
